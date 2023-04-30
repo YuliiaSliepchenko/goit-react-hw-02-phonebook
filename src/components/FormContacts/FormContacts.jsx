@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import s from './FormContacts.module.css'
 
 class Form extends Component {
    state = {
-    // contacts: [ { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    // ],
-    // filter: '',
     name: '',
     number: '',
 };
@@ -33,31 +28,14 @@ class Form extends Component {
            reset = () => {
             this.setState({ name: '', number: ''})
            };
-
-        //    contactAdd = ({ name, number }) => {
-        //     this.setState({
-        //     contacts: [{ id: nanoid(), name, number}, ...this.state.contacts],
-        // });
-        //    };
-        //    filterOn = e => {
-        //     this.setState({filter:e.currentTarget.value})
-        //    };
           
    render() {
-    // const contactsArey =this.state.contacts;
-    // const { filter, contacts } = this.state;
-    // const normalize = filter.toLowerCase();
-    // const contactAvaileble = contacts.filter(contact => {
-    //     return contact.name.toLowerCase().includes(normalize);
-    // });
+   
     return ( 
-        // <div>
-        //     <div>
-        //         <h2>Phonebook</h2>
                 
-         <form onSubmit={this.handleSubmit}>
-            <title>Name</title>
-        <label htmlFor={this.nameId}>
+         <form className={s.form} onSubmit={this.handleSubmit}>
+            <h2 className={s.title}>Name</h2>
+        <label className={s.form_label} htmlFor={this.nameId}>
           <input type="text"
            name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -68,8 +46,8 @@ class Form extends Component {
            id={this.nameId}
             />
             </label>
-            <title>Number</title>
-           <label htmlFor={this.numberId}>
+            <h2 className={s.title}>Number</h2>
+           <label className={s.form_label} htmlFor={this.numberId}>
           <input
            type="tel"
             name="number"
@@ -81,32 +59,8 @@ class Form extends Component {
            id={this.numberId}
             />
             </label>
-          <button type="submit">Add contacts</button>
+          <button className={s.form_btn} type="submit">Add contacts</button>
           </form>
-          
-        //   </div>
-
-        //   <div>
-        //     <h2>Contacts</h2>
-        //     <span>Find contacts by name</span>
-        // <label htmlFor="">
-        //     <input 
-        //     value={this.state.filter}
-        //      onChange={this.filterOn} 
-        //       type="text" />
-        //        <input/>
-        //       </label>
-        //     <ul>
-        //   {contactAvaileble.map(({id, name, number}) => {
-        //      return (
-        //       <li key={id}>
-        //          {name}: {number} 
-        //          </li>
-        //          );
-        //       })}
-        //     </ul>
-        //    </div>
-        //   </div>
          );
       }
     }

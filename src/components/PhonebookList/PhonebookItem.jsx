@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import s from './PhonebookItem.module.css'
 
 const PhoneItem = ({id, name, number, deleteContact}) => {
     return (
-        <div>
-            <li key={id}>
+        <div className={s.item_list}>
+            <li  className={s.item_text} key={id}>
                 {name}: {number}
-<button onClick={() => deleteContact(id)} type="button" id={id}>
+                
+<button className={s.item_btn} onClick={() => deleteContact(id)} type="button" id={id}>
     Delete
     </button>
       </li>                  
@@ -13,9 +15,9 @@ const PhoneItem = ({id, name, number, deleteContact}) => {
     );
 };
 PhoneItem.propTypes = {
-    id:PropTypes.number.isRequired,
+    id:PropTypes.string.isRequired,
      name:PropTypes.string.isRequired,
-      number:PropTypes.number.isRequired,
+      number:PropTypes.string.isRequired,
        deleteContact:PropTypes.func.isRequired 
 }
 
