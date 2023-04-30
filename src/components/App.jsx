@@ -5,7 +5,7 @@ import  Form  from './FormContacts/FormContacts';
 
 export class App extends Component {
  
-  nameId = nanoid();
+ 
   
   formSubmitHandler = data => {
     console.log(data);

@@ -5,9 +5,11 @@ class Form extends Component {
    state = {
     contacts: [],
     name: '',
+    number: '',
 };
 
-    nameInputId = nanoid();
+    nameId = nanoid();
+    numberId = nanoid();
 
     handleChange = e => {
         const  {name ,value }= e.currentTarget;
@@ -15,18 +17,20 @@ class Form extends Component {
          };
 
     handleSubmit = e => {
+        const { name, number} =this.state
             e.preventDefault();
-            this.props.onSubmit(this.state);
+            console.log(this.state);
+            this.contactAdd({name: name, number:number});
             this.reset()
            };
 
            reset = () => {
-            this.setState({contacts: [], name: '',})
+            this.setState({contacts: [], name: '', number: ''})
            };
 
-           contactAdd = ({ name }) => {
+           contactAdd = ({ name, number }) => {
             this.setState({
-            contacts: [{ id: nanoid(), name}, ...this.state.contacts],
+            contacts: [{ id: nanoid(), name, number}, ...this.state.contacts],
         });
            };
           
@@ -38,8 +42,9 @@ class Form extends Component {
                 <h2>Phonebook</h2>
                 <span>Name</span>
          <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameId}></label>
-          <input type="text" name="name"
+        <label htmlFor={this.nameId}>
+          <input type="text"
+           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -47,7 +52,20 @@ class Form extends Component {
            onChange={this.handleChange}
            id={this.nameId}
             />
-          
+            </label>
+
+           <label htmlFor={this.numberId}>
+          <input
+           type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+           value={this.state.number} 
+           onChange={this.handleChange}
+           id={this.numberId}
+            />
+            </label>
           <button type="submit">Add contacts</button>
           </form>
           </div>
@@ -55,13 +73,19 @@ class Form extends Component {
           <div>
             <h2>Contacts</h2>
             <ul>
-          {contactsArey.map(element => {
-             return <li key={element.id}> {element.name} </li>;
+          {contactsArey.map(({id, name, number}) => {
+             return (
+              <li key={id}>
+                 {name}: {number} 
+                 </li>
+                 );
               })}
             </ul>
            </div>
           </div>
-           ) ;
-   }
-}
+         );
+      }
+    }
+   
+
 export default Form;
