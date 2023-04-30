@@ -3,10 +3,17 @@ import { nanoid } from 'nanoid';
 
 class Form extends Component {
    state = {
-    contacts: [],
+    contacts: [ { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
     name: '',
     number: '',
 };
+
+
 
     nameId = nanoid();
     numberId = nanoid();
@@ -33,9 +40,17 @@ class Form extends Component {
             contacts: [{ id: nanoid(), name, number}, ...this.state.contacts],
         });
            };
+           filterOn = e => {
+            this.setState({filter:e.currentTarget.value})
+           };
           
    render() {
-    const contactsArey =this.state.contacts;
+    // const contactsArey =this.state.contacts;
+    const { filter, contacts } = this.state;
+    const normalize = filter.toLowerCase();
+    const contactAvaileble = contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(normalize);
+    });
     return ( 
         <div>
             <div>
@@ -72,8 +87,16 @@ class Form extends Component {
 
           <div>
             <h2>Contacts</h2>
+            <span>Find contacts by name</span>
+        <label htmlFor="">
+            <input 
+            value={this.state.filter}
+             onChange={this.filterOn} 
+              type="text" />
+               <input/>
+              </label>
             <ul>
-          {contactsArey.map(({id, name, number}) => {
+          {contactAvaileble.map(({id, name, number}) => {
              return (
               <li key={id}>
                  {name}: {number} 
