@@ -1,16 +1,22 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { nanoid } from 'nanoid';
+import { Component } from 'react';
+import  Form  from './FormContacts/FormContacts';
+
+
+export class App extends Component {
+ 
+  nameId = nanoid();
+  
+  formSubmitHandler = data => {
+    console.log(data);
+  };
+
+  render() {
+    
+    return (
+      <div>
+     <Form onSubmit={this.formSubmitHandler}/>
+        </div>
+    );
+  }
+}
