@@ -7,7 +7,8 @@ class Form extends Component {
    state = {
     name: '',
     number: '',
-};
+  };
+  
 
     nameId = nanoid();
     numberId = nanoid();
@@ -21,7 +22,7 @@ class Form extends Component {
         const { name, number} =this.state;
             e.preventDefault();
           
-            this.props.contactAdd({name: name, number:number});
+            this.props.contactAdd({name,number});
             this.reset()
            };
 
